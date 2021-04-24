@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
         } else if (!collectible && other.CompareTag("Collectible"))
         {
             collectible = other.gameObject.GetComponent<Collectible>();
-            collectible.transform.SetParent(transform);
+            collectible.Capture(transform);
         }
     }
 
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!collectible) return;
 
-        collectible.transform.SetParent(null);
+        collectible.Release();
         collectible = null;
     }
 
