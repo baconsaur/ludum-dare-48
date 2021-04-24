@@ -5,11 +5,12 @@ public class PlayerController : MonoBehaviour
 {
     public GameController gameController;
     public float floatSpeed;
+    public float retractSpeed;
 
     private new Rigidbody2D rigidbody;
     private new Camera camera;
 
-    public GameObject collectible;
+    public Collectible collectible;
 
     private void Start()
     {
@@ -36,13 +37,14 @@ public class PlayerController : MonoBehaviour
 
         if (collectible)
         {
-            rigidbody.gravityScale = 1;
+            rigidbody.gravityScale = retractSpeed / floatSpeed;
+            rigidbody.drag = collectible.weight;
             return;
         }
 
         if (Input.GetAxis("Fire1") == 1)
         {
-            rigidbody.gravityScale = 1;
+            rigidbody.gravityScale = retractSpeed / floatSpeed;
         }
         else
         {
@@ -57,16 +59,26 @@ public class PlayerController : MonoBehaviour
             gameController.Exit();
         } else if (!collectible && other.CompareTag("Collectible"))
         {
-            collectible = other.gameObject;
+            collectible = other.gameObject.GetComponent<Collectible>();
             collectible.transform.SetParent(transform);
         }
     }
 
+    public void DropCollectible()
+    {
+        if (!collectible) return;
+
+        collectible.transform.SetParent(null);
+        collectible = null;
+    }
+
     public void Reset()
     {
-        Destroy(collectible);
+        if (collectible) Destroy(collectible.gameObject);
+
         transform.position = Vector2.zero;
         rigidbody.velocity = Vector2.zero;
         rigidbody.gravityScale = 0;
+        rigidbody.drag = 0;
     }
 }

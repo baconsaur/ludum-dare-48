@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,13 +8,24 @@ public class GameController : MonoBehaviour
     public Slider slider;
     public float maxSupply = 100;
     public float lossRate;
-    public bool active = true;
+    public bool active;
+    public GameObject menu;
 
     private float supply;
 
     void Start()
     {
         supply = maxSupply;
+    }
+
+    void Update()
+    {
+        if (active) return;
+
+        if (Input.anyKeyDown)
+        {
+            Enter();
+        }
     }
 
     void FixedUpdate()
@@ -25,31 +37,30 @@ public class GameController : MonoBehaviour
 
         if (supply <= 0)
         {
-            if (playerController.collectible) playerController.collectible = null;
+            playerController.DropCollectible();
             Exit();
         }
     }
 
-    public void UpgradeSupply()
+    public void UpgradeSupply(Collectible collectible)
     {
-        // TODO: get from power up?
-        var upgrade = 25;
-
         var rectTransform = slider.GetComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(rectTransform.rect.width + upgrade, rectTransform.rect.height);
-        maxSupply += upgrade;
+        rectTransform.sizeDelta = new Vector2(rectTransform.rect.width + collectible.value, rectTransform.rect.height);
+        maxSupply += collectible.value;
         supply = maxSupply;
     }
 
     public void Exit()
     {
-        if (playerController.collectible) UpgradeSupply();
+        if (playerController.collectible) UpgradeSupply(playerController.collectible);
         playerController.Reset();
         active = false;
+        menu.SetActive(true);
     }
 
     public void Enter()
     {
+        menu.SetActive(false);
         SetCameraY(0);
         active = true;
         supply = maxSupply;
