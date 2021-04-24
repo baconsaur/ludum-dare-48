@@ -25,11 +25,7 @@ public class GameController : MonoBehaviour
 
         if (supply <= 0)
         {
-            if (playerController.collectible)
-            {
-                playerController.collectible.transform.SetParent(null);
-                playerController.collectible = null;
-            }
+            if (playerController.collectible) playerController.collectible = null;
             Exit();
         }
     }

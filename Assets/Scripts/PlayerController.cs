@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
             Screen.height * 0.5f,
             camera.nearClipPlane));
 
-        if (rigidbody.velocity.y > 0 && transform.position.y >= screenCenter.y)
+        if (!collectible && rigidbody.velocity.y > 0 && transform.position.y >= screenCenter.y)
         {
             gameController.SetCameraY(transform.position.y);
         }
