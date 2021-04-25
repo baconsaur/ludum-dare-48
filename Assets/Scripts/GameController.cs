@@ -65,6 +65,7 @@ public class GameController : MonoBehaviour
 
     public void Enter()
     {
+        StartCoroutine(playerController.SetRetractionDelay());
         menu.SetActive(false);
         SetCameraY(0);
         active = true;
