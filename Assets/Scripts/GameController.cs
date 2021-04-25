@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -151,7 +152,11 @@ public class GameController : MonoBehaviour
     {
         SetCameraY(0);
 
-        if (playerController.collectible) UpgradeSupply(playerController.collectible);
+        if (playerController.collectible)
+        {
+            if (playerController.collectible.name == "PowerCell") EndGame();
+            UpgradeSupply(playerController.collectible);
+        }
         else StartCoroutine(FillSupplyBar(false));
 
         playerController.Reset();
@@ -162,5 +167,10 @@ public class GameController : MonoBehaviour
         }
 
         obstacles = new List<GameObject>();
+    }
+
+    private void EndGame()
+    {
+        SceneManager.LoadScene("End");
     }
 }
