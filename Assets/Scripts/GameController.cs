@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,6 +52,7 @@ public class GameController : MonoBehaviour
         rectTransform.sizeDelta = new Vector2(rectTransform.rect.width + collectible.value, rectTransform.rect.height);
         maxSupply += collectible.value;
         supply = maxSupply;
+        StartCoroutine("FillSupplyBar");
     }
 
     public void Exit()
@@ -72,5 +74,18 @@ public class GameController : MonoBehaviour
     public void SetCameraY(float y)
     {
         transform.position = new Vector3(transform.position.x, y, transform.position.z);
+    }
+
+    private IEnumerator FillSupplyBar()
+    {
+        var fill = slider.GetComponentsInChildren<Image>()[1];
+        fill.color = Color.green;
+
+        while (slider.value < 1)
+        {
+            slider.value += Time.deltaTime * 2;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        fill.color = Color.white;
     }
 }
