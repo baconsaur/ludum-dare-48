@@ -7,6 +7,7 @@ TagManager:
   - Exit
   - Collectible
   - Tether
+  - Background
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
+  - Collectible
   - 
   - 
   - 

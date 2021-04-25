@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
             gameController.Exit();
         } else if (!collectible && other.CompareTag("Collectible"))
         {
-            GrabCollectible(other.gameObject);
+            GrabCollectible(other.transform.parent.gameObject);
         }
     }
 
