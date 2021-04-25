@@ -12,9 +12,11 @@ public class GameController : MonoBehaviour
     public GameObject menu;
 
     private float supply;
+    private SoundController soundController;
 
-    void Start()
+    void Awake()
     {
+        soundController = GetComponent<SoundController>();
         supply = maxSupply;
     }
 
@@ -44,6 +46,7 @@ public class GameController : MonoBehaviour
 
     public void UpgradeSupply(Collectible collectible)
     {
+        soundController.PlayIncreaseOxygen();
         var rectTransform = slider.GetComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(rectTransform.rect.width + collectible.value, rectTransform.rect.height);
         maxSupply += collectible.value;

@@ -11,9 +11,11 @@ public class Collectible : MonoBehaviour
 
     private int rotationSpeed;
     private IEnumerator coroutine;
+    private SoundController soundController;
 
-    void Start()
+    void Awake()
     {
+        soundController = Camera.main.GetComponent<SoundController>();
         rotationSpeed = defaultRotationSpeed;
     }
 
@@ -24,6 +26,7 @@ public class Collectible : MonoBehaviour
 
     public void Capture(Transform parent)
     {
+        soundController.PlayGrabItem();
         transform.SetParent(parent);
         rotationSpeed = 0;
         coroutine = HoldObject(parent);
@@ -32,6 +35,7 @@ public class Collectible : MonoBehaviour
 
     public void Release()
     {
+        soundController.PlayLoseItem();
         StopCoroutine(coroutine);
         transform.SetParent(null);
         rotationSpeed = defaultRotationSpeed;
