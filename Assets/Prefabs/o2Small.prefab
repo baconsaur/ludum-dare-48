@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6487110785297289441}
   - component: {fileID: 6009554108487055128}
   m_Layer: 0
-  m_Name: Collectible
+  m_Name: o2Small
   m_TagString: Collectible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,9 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e5417b64e501b42829473d2d16ba82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 0
+  weight: 5
   value: 10
-  rotationSpeed: 10
+  defaultRotationSpeed: 10
 --- !u!50 &6487110785297289441
 Rigidbody2D:
   serializedVersion: 4

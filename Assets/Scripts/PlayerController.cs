@@ -4,8 +4,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public GameController gameController;
-    public float floatSpeed;
-    public float retractSpeed;
+    public float moveSpeed;
 
     private new Rigidbody2D rigidbody;
     private new Camera camera;
@@ -32,23 +31,16 @@ public class PlayerController : MonoBehaviour
             gameController.SetCameraY(transform.position.y);
         }
 
-        float xMotion = Input.GetAxis("Horizontal") * floatSpeed * Time.deltaTime;
-        rigidbody.velocity = new Vector3(xMotion, rigidbody.velocity.y);
+        float xMotion = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        float yMotion = moveSpeed * Time.deltaTime;
+        if (Input.GetAxis("Vertical") < 0) yMotion *= -1;
+
+        rigidbody.velocity = new Vector3(xMotion, yMotion);
 
         if (collectible)
         {
-            rigidbody.gravityScale = retractSpeed / floatSpeed;
+            rigidbody.velocity = new Vector3(xMotion, -1.5f * moveSpeed * Time.deltaTime);
             rigidbody.drag = collectible.weight;
-            return;
-        }
-
-        if (Input.GetAxis("Fire1") == 1)
-        {
-            rigidbody.gravityScale = retractSpeed / floatSpeed;
-        }
-        else
-        {
-            rigidbody.gravityScale = -1;
         }
     }
 
