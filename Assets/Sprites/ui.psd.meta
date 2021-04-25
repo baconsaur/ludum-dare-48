@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8b34538f5cd0e3f4a84b1955d5b87f15
+guid: 7e0238ff319b88243a2957e2d5ba01b2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -51,7 +51,7 @@ TextureImporter:
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: 0.26
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -79,60 +79,7 @@ TextureImporter:
     serializedVersion: 2
     sprites: []
     outline: []
-    physicsShape:
-    - - {x: 148, y: -99}
-      - {x: 148, y: -89}
-      - {x: 156, y: -87}
-      - {x: 163, y: -81}
-      - {x: 162, y: -47}
-      - {x: 154, y: -40}
-      - {x: 147, y: -35}
-      - {x: 151, y: 13}
-      - {x: 166, y: 35}
-      - {x: 167, y: 53}
-      - {x: 167, y: 64}
-      - {x: 162, y: 70}
-      - {x: 152, y: 75}
-      - {x: 155, y: 86}
-      - {x: 154, y: 97}
-      - {x: 149, y: 111}
-      - {x: 142, y: 122}
-      - {x: 132, y: 136}
-      - {x: 122, y: 142}
-      - {x: 102, y: 143}
-      - {x: 41, y: 144}
-      - {x: 37, y: 149}
-      - {x: 28, y: 156}
-      - {x: -41, y: 156}
-      - {x: -55, y: 151}
-      - {x: -60, y: 144}
-      - {x: -83, y: 143}
-      - {x: -105, y: 141}
-      - {x: -142, y: 136}
-      - {x: -150, y: 130}
-      - {x: -151, y: 125}
-      - {x: -153, y: 117}
-      - {x: -159, y: 87}
-      - {x: -164, y: 81}
-      - {x: -163, y: 62}
-      - {x: -160, y: 46}
-      - {x: -163, y: -10}
-      - {x: -163, y: -41}
-      - {x: -167, y: -45}
-      - {x: -167, y: -62}
-      - {x: -166, y: -72}
-      - {x: -160, y: -79}
-      - {x: -158, y: -107}
-      - {x: -154, y: -132}
-      - {x: -144, y: -143}
-      - {x: -124, y: -150}
-      - {x: -95, y: -154}
-      - {x: -77, y: -154}
-      - {x: -37, y: -156}
-      - {x: 57, y: -156}
-      - {x: 108, y: -149}
-      - {x: 127, y: -145}
-      - {x: 146, y: -131}
+    physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
