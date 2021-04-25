@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Collectible : MonoBehaviour
@@ -6,8 +7,10 @@ public class Collectible : MonoBehaviour
     public int weight;
     public int value = 10;
     public int defaultRotationSpeed = 10;
+    public int grabSpeed = 10;
 
     private int rotationSpeed;
+    private IEnumerator coroutine;
 
     void Start()
     {
@@ -23,11 +26,27 @@ public class Collectible : MonoBehaviour
     {
         transform.SetParent(parent);
         rotationSpeed = 0;
+        coroutine = HoldObject(parent);
+        StartCoroutine(coroutine);
     }
 
     public void Release()
     {
+        StopCoroutine(coroutine);
         transform.SetParent(null);
         rotationSpeed = defaultRotationSpeed;
+    }
+
+    IEnumerator HoldObject(Transform parent)
+    {
+        var renderer = GetComponent<Renderer>();
+        var offset = new Vector3(0, Vector2.Distance(renderer.bounds.min, transform.position), 0);
+        var target = parent.position - offset;
+
+        while (transform.position != target)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target, Time.deltaTime * grabSpeed);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
     }
 }

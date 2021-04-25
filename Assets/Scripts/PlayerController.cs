@@ -8,11 +8,13 @@ public class PlayerController : MonoBehaviour
 
     private new Rigidbody2D rigidbody;
     private new Camera camera;
+    private Vector2 startPosition;
 
     public Collectible collectible;
 
     private void Start()
     {
+        startPosition = transform.position;
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
         camera = Camera.main;
     }
@@ -68,7 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collectible) Destroy(collectible.gameObject);
 
-        transform.position = Vector2.zero;
+        transform.position = startPosition;
         rigidbody.velocity = Vector2.zero;
         rigidbody.gravityScale = 0;
         rigidbody.drag = 0;
