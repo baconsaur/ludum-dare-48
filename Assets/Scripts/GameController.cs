@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     public float fadeSpeed = 20;
     public float boostDrain = 5;
     public float screenShakeMagnitude = 0.05f;
+    public float maxCameraHeight = 109;
 
     private float supply;
     private bool ready = true;
@@ -124,6 +125,8 @@ public class GameController : MonoBehaviour
 
     public void SetCameraY(float y)
     {
+        if (y >= maxCameraHeight) return;
+
         var parentTransform = transform.parent.transform;
         parentTransform.position = new Vector3(parentTransform.position.x, y, parentTransform.position.z);
     }
