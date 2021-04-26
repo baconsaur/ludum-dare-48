@@ -150,7 +150,8 @@ GameObject:
   - component: {fileID: 5179258312764123672}
   - component: {fileID: 5179258312764123679}
   - component: {fileID: 5179258312764123674}
-  - component: {fileID: 8030182958925123669}
+  - component: {fileID: 4381586212710419641}
+  - component: {fileID: 6389843932218402393}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -213,12 +214,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2a6955ffab60ca54bae4f193698c54a9, type: 3}
+  m_Sprite: {fileID: 4334783836991956000, guid: 2a6955ffab60ca54bae4f193698c54a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.9, y: 2.31}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -264,7 +265,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!60 &8030182958925123669
+--- !u!95 &4381586212710419641
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5179258312764123678}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f9fb89070adf604991f81a815b580a0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!60 &6389843932218402393
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -281,39 +301,36 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.79, y: 2.31}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 1.9, y: 2.31}
+    newSize: {x: 1.9, y: 2.31}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.39499998, y: -1.0849999}
-      - {x: 0.60499996, y: -0.775}
-      - {x: 0.655, y: -0.45499998}
-      - {x: 0.805, y: -0.225}
-      - {x: 0.835, y: 0.155}
-      - {x: 0.765, y: 0.285}
-      - {x: 0.45499998, y: 0.39499998}
-      - {x: 0.565, y: 0.555}
-      - {x: 0.545, y: 0.815}
-      - {x: 0.415, y: 0.98499995}
-      - {x: 0.16499999, y: 1.105}
-      - {x: -0.065, y: 1.125}
-      - {x: -0.33499998, y: 0.995}
-      - {x: -0.545, y: 0.705}
-      - {x: -0.505, y: 0.435}
-      - {x: -0.285, y: 0.275}
-      - {x: -0.655, y: 0.114999995}
-      - {x: -0.885, y: -0.155}
-      - {x: -0.655, y: -0.195}
-      - {x: -0.305, y: -0.145}
-      - {x: -0.21499999, y: -0.465}
-      - {x: -0.315, y: -0.655}
-      - {x: -0.285, y: -1.035}
-      - {x: -0.255, y: -1.105}
-      - {x: -0.024999999, y: -0.945}
-      - {x: 0.114999995, y: -0.695}
-      - {x: 0.255, y: -0.92499995}
-      - {x: 0.295, y: -1.115}
+    - - {x: 0.22999999, y: -1.155}
+      - {x: 0.35, y: -1.155}
+      - {x: 0.62, y: -0.78499997}
+      - {x: 0.71999997, y: -0.515}
+      - {x: 0.77, y: -0.325}
+      - {x: 0.83, y: -0.205}
+      - {x: 0.83, y: 0.155}
+      - {x: 0.81, y: 0.265}
+      - {x: 0.63, y: 0.475}
+      - {x: 0.59999996, y: 0.705}
+      - {x: 0.32, y: 1.125}
+      - {x: 0.19, y: 1.155}
+      - {x: -0.14, y: 1.155}
+      - {x: -0.29999998, y: 1.135}
+      - {x: -0.66999996, y: 0.765}
+      - {x: -0.62, y: 0.355}
+      - {x: -0.59999996, y: 0.205}
+      - {x: -0.57, y: -0.315}
+      - {x: -0.52, y: -0.615}
+      - {x: -0.42, y: -1.0749999}
+      - {x: -0.38, y: -1.155}
+      - {x: -0.26, y: -1.155}
+      - {x: -0.03, y: -1.005}
+      - {x: 0.06, y: -0.755}
+      - {x: 0.14999999, y: -1.115}

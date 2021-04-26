@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
     private new Rigidbody2D rigidbody;
     private new Camera camera;
+    private Animator animator;
+
     private Vector2 startPosition;
     private bool canMoveVertically;
 
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         startPosition = transform.position;
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
         camera = Camera.main;
@@ -79,6 +82,7 @@ public class PlayerController : MonoBehaviour
 
     private void GrabCollectible(GameObject obj)
     {
+        animator.Play("PlayerLift");
         ShowExit();
         collectible = obj.GetComponent<Collectible>();
         collectible.Capture(transform);
@@ -86,6 +90,7 @@ public class PlayerController : MonoBehaviour
 
     public void DropCollectible()
     {
+        animator.Play("PlayerIdle");
         if (!collectible) return;
 
         collectible.Release();
@@ -112,6 +117,7 @@ public class PlayerController : MonoBehaviour
         rigidbody.velocity = Vector2.zero;
         rigidbody.gravityScale = 0;
         rigidbody.drag = 0;
+        animator.Play("PlayerIdle");
     }
 
     public IEnumerator SetRetractionDelay()

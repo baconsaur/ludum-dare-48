@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using UnityEngine;
 
 public class Collectible : MonoBehaviour
@@ -7,10 +5,9 @@ public class Collectible : MonoBehaviour
     public int weight;
     public int value = 10;
     public int defaultRotationSpeed = 10;
-    public int grabSpeed = 10;
+    public int carryRotation = -90;
 
     private int rotationSpeed;
-    private IEnumerator coroutine;
     private SoundController soundController;
 
     void Awake()
@@ -29,28 +26,23 @@ public class Collectible : MonoBehaviour
         soundController.PlayGrabItem();
         transform.SetParent(parent);
         rotationSpeed = 0;
-        coroutine = HoldObject(parent);
-        StartCoroutine(coroutine);
+        HoldObject(parent);
     }
 
     public void Release()
     {
         soundController.PlayLoseItem();
-        StopCoroutine(coroutine);
         transform.SetParent(null);
         rotationSpeed = defaultRotationSpeed;
     }
 
-    IEnumerator HoldObject(Transform parent)
+    void HoldObject(Transform parent)
     {
-        var renderer = GetComponent<Renderer>();
-        var offset = new Vector3(0, Vector2.Distance(renderer.bounds.min, transform.position), 0);
-        var target = parent.position - offset;
+        var parentRenderer = parent.GetComponent<Renderer>();
 
-        while (transform.position != target)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, target, Time.deltaTime * grabSpeed);
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
+        var distanceToPlayerHead = parentRenderer.bounds.max.y - parent.position.y;
+
+        transform.position = parent.position + new Vector3(0, distanceToPlayerHead, 0);
+        transform.rotation = Quaternion.Euler(0, 0, carryRotation);
     }
 }
