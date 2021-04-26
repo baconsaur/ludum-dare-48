@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameController gameController;
     public GameObject exitIndicator;
+    public float maxPlayerHeight = 116.3f;
     public float moveSpeed;
     public float boostMuiltiplier = 2.5f;
     public float verticalMoveDelaySeconds = 1;
@@ -56,6 +57,8 @@ public class PlayerController : MonoBehaviour
 
         float xMotion = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         float yMotion = (boosting && !collectible ? moveSpeed * boostMuiltiplier : moveSpeed) * Time.deltaTime;
+
+        if (transform.position.y >= maxPlayerHeight && yInput >= 0) yMotion = 0;
 
         if (yInput < 0 && canMoveVertically)
         {
