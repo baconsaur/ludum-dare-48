@@ -45,6 +45,15 @@ public class PlayerController : MonoBehaviour
         var yInput = Input.GetAxis("Vertical");
         boosting = canMoveVertically && yInput > 0.1;
 
+        if (boosting && !collectible)
+        {
+            animator.Play("PlayerBoost");
+        }
+        else if (!collectible)
+        {
+            animator.Play("PlayerIdle");
+        }
+
         float xMotion = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         float yMotion = (boosting && !collectible ? moveSpeed * boostMuiltiplier : moveSpeed) * Time.deltaTime;
 
@@ -90,7 +99,6 @@ public class PlayerController : MonoBehaviour
 
     public void DropCollectible()
     {
-        animator.Play("PlayerIdle");
         if (!collectible) return;
 
         collectible.Release();

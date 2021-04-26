@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     public float obstacleSpawnChance = 0.75f;
     public float fadeSpeed = 20;
     public float boostDrain = 5;
+    public float screenShakeMagnitude = 0.05f;
 
     private float supply;
     private bool ready = true;
@@ -28,6 +29,7 @@ public class GameController : MonoBehaviour
     private float obstacleSpawnCooldown;
     private List<GameObject> obstacles = new List<GameObject>();
     private Image sliderFill;
+    private bool screenShaking;
 
     void Awake()
     {
@@ -51,6 +53,7 @@ public class GameController : MonoBehaviour
         var actualLossRate = lossRate;
         if (playerController.boosting)
         {
+            if (!screenShaking) StartCoroutine("ScreenShake");
             soundController.StartBoost();
             sliderFill.color = Color.yellow;
             actualLossRate *= boostDrain;
@@ -121,7 +124,8 @@ public class GameController : MonoBehaviour
 
     public void SetCameraY(float y)
     {
-        transform.position = new Vector3(transform.position.x, y, transform.position.z);
+        var parentTransform = transform.parent.transform;
+        parentTransform.position = new Vector3(parentTransform.position.x, y, parentTransform.position.z);
     }
 
     private IEnumerator FillSupplyBar(bool success)
@@ -183,5 +187,20 @@ public class GameController : MonoBehaviour
     private void EndGame()
     {
         SceneManager.LoadScene("End");
+    }
+
+    IEnumerator ScreenShake()
+    {
+        screenShaking = true;
+        var initialPosition = transform.localPosition;
+
+        while (active && playerController.boosting)
+        {
+            transform.localPosition = initialPosition + (Vector3)Random.insideUnitCircle * screenShakeMagnitude;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
+        transform.localPosition = initialPosition;
+        screenShaking = false;
     }
 }
