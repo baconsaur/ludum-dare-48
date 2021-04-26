@@ -7,12 +7,14 @@ public class PlayerController : MonoBehaviour
     public GameController gameController;
     public GameObject exitIndicator;
     public float moveSpeed;
-    public float retractionDelaySeconds = 1;
+    public float boostMuiltiplier = 2.5f;
+    public float verticalMoveDelaySeconds = 1;
+    public bool boosting;
 
     private new Rigidbody2D rigidbody;
     private new Camera camera;
     private Vector2 startPosition;
-    private bool canRetract;
+    private bool canMoveVertically;
 
     public Collectible collectible;
 
@@ -37,9 +39,13 @@ public class PlayerController : MonoBehaviour
             gameController.SetCameraY(transform.position.y);
         }
 
+        var yInput = Input.GetAxis("Vertical");
+        boosting = canMoveVertically && yInput > 0.1;
+
         float xMotion = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-        float yMotion = moveSpeed * Time.deltaTime;
-        if (Input.GetAxis("Vertical") < 0 && canRetract)
+        float yMotion = (boosting && !collectible ? moveSpeed * boostMuiltiplier : moveSpeed) * Time.deltaTime;
+
+        if (yInput < 0 && canMoveVertically)
         {
             ShowExit();
             yMotion *= -1;
@@ -53,8 +59,10 @@ public class PlayerController : MonoBehaviour
 
         if (collectible)
         {
-            rigidbody.velocity = new Vector3(xMotion, -1.5f * moveSpeed * Time.deltaTime);
             rigidbody.drag = collectible.weight;
+            if (boosting) return;
+
+            rigidbody.velocity = new Vector3(xMotion, -1.5f * moveSpeed * Time.deltaTime);
         }
     }
 
@@ -108,8 +116,8 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator SetRetractionDelay()
     {
-        canRetract = false;
-        yield return new WaitForSeconds(retractionDelaySeconds);
-        canRetract = true;
+        canMoveVertically = false;
+        yield return new WaitForSeconds(verticalMoveDelaySeconds);
+        canMoveVertically = true;
     }
 }

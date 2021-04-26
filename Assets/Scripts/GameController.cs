@@ -20,15 +20,18 @@ public class GameController : MonoBehaviour
     public float obstacleSpawnTime = 10;
     public float obstacleSpawnChance = 0.75f;
     public float fadeSpeed = 20;
+    public float boostDrain = 5;
 
     private float supply;
     private bool ready = true;
     private SoundController soundController;
     private float obstacleSpawnCooldown;
     private List<GameObject> obstacles = new List<GameObject>();
+    private Image sliderFill;
 
     void Awake()
     {
+        sliderFill = slider.GetComponentsInChildren<Image>()[1];
         soundController = GetComponent<SoundController>();
         supply = maxSupply;
         obstacleSpawnCooldown = obstacleSpawnTime;
@@ -42,6 +45,29 @@ public class GameController : MonoBehaviour
         {
             Enter();
         }
+
+        if (!active) return;
+
+        var actualLossRate = lossRate;
+        if (playerController.boosting)
+        {
+            soundController.StartBoost();
+            sliderFill.color = Color.yellow;
+            actualLossRate *= boostDrain;
+        }
+        else
+        {
+            soundController.StopBoost();
+            sliderFill.color = Color.white;
+        }
+
+        supply -= actualLossRate * Time.deltaTime;
+        slider.value = supply / maxSupply;
+
+        if (supply > 0) return;
+
+        playerController.DropCollectible();
+        Exit();
     }
 
     private void SpawnObstacle()
@@ -68,20 +94,6 @@ public class GameController : MonoBehaviour
         obstacleSpawnCooldown = obstacleSpawnTime;
     }
 
-    void FixedUpdate()
-    {
-        if (!active) return;
-
-        supply -= lossRate * Time.deltaTime;
-        slider.value = supply / maxSupply;
-
-        if (supply <= 0)
-        {
-            playerController.DropCollectible();
-            Exit();
-        }
-    }
-
     public void UpgradeSupply(Collectible collectible)
     {
         soundController.PlayIncreaseOxygen();
@@ -94,6 +106,7 @@ public class GameController : MonoBehaviour
 
     public void Exit()
     {
+        soundController.StopBoost();
         active = false;
         StartCoroutine("FadeToBlack");
     }
@@ -113,16 +126,14 @@ public class GameController : MonoBehaviour
 
     private IEnumerator FillSupplyBar(bool success)
     {
-        var fill = slider.GetComponentsInChildren<Image>()[1];
-
-        fill.color = success ? Color.green : Color.red;
+        sliderFill.color = success ? Color.green : Color.red;
 
         while (slider.value < 1)
         {
             slider.value += Time.deltaTime * 2;
             yield return new WaitForSeconds(Time.deltaTime);
         }
-        fill.color = Color.white;
+        sliderFill.color = Color.white;
     }
     private IEnumerator FadeToBlack()
     {
