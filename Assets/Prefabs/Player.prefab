@@ -98,7 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 0}
-  moveSpeed: 100
+  exitIndicator: {fileID: 0}
+  moveSpeed: 150
+  retractionDelaySeconds: 1
   collectible: {fileID: 0}
 --- !u!50 &5179258312764123674
 Rigidbody2D:

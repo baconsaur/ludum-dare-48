@@ -101,7 +101,7 @@ MonoBehaviour:
   weight: 100
   value: 0
   defaultRotationSpeed: 0
-  grabSpeed: 10
+  grabSpeed: 5
 --- !u!50 &6487110785297289441
 Rigidbody2D:
   serializedVersion: 4
