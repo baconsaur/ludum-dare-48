@@ -1492,7 +1492,7 @@ Transform:
   - {fileID: 209678395}
   - {fileID: 37847740}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &550085049
 GameObject:
@@ -2403,7 +2403,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &920530649
 GameObject:
@@ -2887,11 +2887,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7356814999997321009, guid: cabe4b439380bd041b2fecbb3dc76ec1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.2
+      value: 7.22
       objectReference: {fileID: 0}
     - target: {fileID: 7356814999997321009, guid: cabe4b439380bd041b2fecbb3dc76ec1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 51.4
+      value: 50.01
       objectReference: {fileID: 0}
     - target: {fileID: 7356814999997321009, guid: cabe4b439380bd041b2fecbb3dc76ec1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4179,7 +4179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
+  m_ScaleFactor: 0.78
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -4735,7 +4735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7203031057395415925, guid: be2ef95c0367b8d4a842595ca3c9ab79, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7203031057395415925, guid: be2ef95c0367b8d4a842595ca3c9ab79, type: 3}
       propertyPath: m_LocalPosition.x
